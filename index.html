@@ -85,136 +85,156 @@
             margin: 0 auto;
             padding: 0 1rem;
         }
+/* Replace the existing .hero section styles with this: */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 2rem 1rem;
+    
+    /* Add the background image */
+    background-image: url('https://raw.githubusercontent.com/Ayman-121/AYMAN/main/InShot_20250620_192310313.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+    /* Dark overlay for readability */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(26, 11, 46, 0.8) 50%,
+            rgba(0, 0, 0, 0.6) 100%
+        );
+        z-index: 1;
+    }
+    
+    /* Animated scanline effect */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(0, 212, 255, 0.1) 50%, transparent 70%);
+        animation: scanline 4s linear infinite;
+        z-index: 2;
+    }
+}
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding: 2rem 1rem;
-            
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: linear-gradient(45deg, transparent 30%, rgba(0, 212, 255, 0.05) 50%, transparent 70%);
-                animation: scanline 4s linear infinite;
-            }
-        }
+/* Make sure all hero content is above the overlays */
+.hero > * {
+    position: relative;
+    z-index: 3;
+}
 
-        @keyframes scanline {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
+/* Enhanced glow effects for better visibility against the background */
+.logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 2rem;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    box-shadow: 0 0 50px rgba(0, 212, 255, 0.5), 0 0 100px rgba(0, 212, 255, 0.3);
+    animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+    position: relative;
+    border: 3px solid rgba(0, 212, 255, 0.3);
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        right: -8px;
+        bottom: -8px;
+        background: var(--accent-gradient);
+        border-radius: 50%;
+        z-index: -1;
+        animation: rotate 10s linear infinite;
+        opacity: 0.8;
+    }
+}
 
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 2rem;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Orbitron', monospace;
-            font-size: 2rem;
-            font-weight: 900;
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
-            animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
-            position: relative;
-            
-            &::before {
-                content: '';
-                position: absolute;
-                top: -5px;
-                left: -5px;
-                right: -5px;
-                bottom: -5px;
-                background: var(--accent-gradient);
-                border-radius: 50%;
-                z-index: -1;
-                animation: rotate 10s linear infinite;
-            }
-        }
+/* Enhanced text glow for better readability */
+.hero-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textGlow 3s ease-in-out infinite alternate;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.8));
+}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
+.hero-subtitle {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    color: #ffffff;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out 0.5s both;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+}
 
-        @keyframes glow {
-            0% { box-shadow: 0 0 50px rgba(0, 212, 255, 0.3); }
-            100% { box-shadow: 0 0 80px rgba(184, 71, 255, 0.5); }
-        }
+/* Enhanced CTA button */
+.cta-button {
+    padding: 1rem 2rem;
+    background: rgba(0, 212, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1s ease-out 1s both;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    
+    &:hover {
+        background: var(--neon-blue);
+        color: var(--dark-bg);
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.6), 0 0 50px rgba(0, 212, 255, 0.4);
+        transform: translateY(-2px);
+    }
+}
 
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+/* Add a subtle parallax effect */
+@media (min-width: 768px) {
+    .hero {
+        background-attachment: fixed;
+    }
+}
 
-        .hero-title {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: textGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes textGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); }
-            100% { filter: drop-shadow(0 0 20px rgba(184, 71, 255, 0.7)); }
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1rem, 4vw, 1.5rem);
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-
-        .cta-button {
-            padding: 1rem 2rem;
-            background: transparent;
-            border: 2px solid var(--neon-blue);
-            color: var(--neon-blue);
-            font-family: 'Orbitron', monospace;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out 1s both;
-            
-            &:hover {
-                background: var(--neon-blue);
-                color: var(--dark-bg);
-                box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
-                transform: translateY(-2px);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+/* Mobile optimization - disable fixed attachment for better performance */
+@media (max-width: 767px) {
+    .hero {
+        background-attachment: scroll;
+    }
+}
+        
         /* Sections */
         .section {
             padding: 5rem 0;
@@ -402,30 +422,29 @@
                 border: 1px solid rgba(0, 212, 255, 0.2);
                 backdrop-filter: blur(10px);
                 transition: all 0.3s ease;
-                
-                &:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 15px 30px rgba(0, 212, 255, 0.2);
-                    border-color: rgba(0, 212, 255, 0.4);
-                }
-                
-                i {
-                    font-size: 1.5rem;
-                    margin-right: 1rem;
-                    color: var(--neon-blue);
-                }
-                
-                .social-info {
-                    h4 {
-                        color: var(--text-primary);
-                        margin-bottom: 0.25rem;
-                    }
-                    
-                    p {
-                        color: var(--text-secondary);
-                        font-size: 0.9rem;
-                    }
-                }
+                position: relative;
+            }
+
+            .social-link:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 30px rgba(0, 212, 255, 0.2);
+                border-color: rgba(0, 212, 255, 0.4);
+                animation: pulse 0.5s;
+            }
+
+            .social-info {
+                margin-left: 1rem;
+            }
+
+            .tagline {
+                font-size: 0.8rem;
+                color: var(--text-secondary);
+            }
+
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
             }
         }
 
@@ -519,86 +538,129 @@
             z-index: 1000;
             transition: width 0.3s ease;
         }
+
+        .language-switcher {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 10px;
+            background-color: rgba(26, 11, 46, 0.8);
+            padding: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .language-switcher button {
+            padding: 10px 15px;
+            background-color: transparent;
+            color: var(--neon-blue);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .language-switcher button:hover {
+            background-color: var(--neon-blue);
+            color: white;
+            transform: scale(1.05);
+        }
     </style>
 </head>
-<body>
+<body lang="en">
     <div class="scroll-indicator"></div>
     
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button id="en-btn">English</button>
+        <button id="ar-btn">العربية</button>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" data-title-en="Welcome to My Digital Empire" data-title-ar="مرحباً بك في امبراطوريتي الرقمية">
         <div class="logo" id="logo">AMK</div>
-        <h1 class="hero-title">You Found Ayman</h1>
-        <p class="hero-subtitle">Code • Fight • Pray • Repeat</p>
+        <h1 class="hero-title" data-title-en="Welcome to My Digital Empire" data-title-ar="مرحباً بك في امبراطوريتي الرقمية">
+            <span class="title-text">Welcome to My Digital Empire</span>
+        </h1>
+        <div class="tagline-container">
+            <h2 class="tagline" data-tagline-en="Building the future, one line at a time" data-tagline-ar="نبني المستقبل، سطرًا بسطر">Building the future, one line at a time</h2>
+            <h2 class="tagline" data-tagline-en="From the Kingdom to the World" data-tagline-ar="من المملكة إلى العالم">From the Kingdom to the World</h2>
+            <h2 class="tagline" data-tagline-en="Where faith meets innovation" data-tagline-ar="حيث يلتقي الإيمان بالابتكار">Where faith meets innovation</h2>
+        </div>
+        <p class="hero-subtitle" data-subtitle-en="Build • Dominate • Elevate • Repeat" data-subtitle-ar="أبني • أهيمن • أرتقي • أكرر">Build • Dominate • Elevate • Repeat</p>
         <button class="cta-button" onclick="scrollToSection('about')">
-            Let's vibe ↓
+            <span data-cta-en="Ready to dive in? ↓" data-cta-ar="جاهز للغوص؟ ↓">Ready to dive in? ↓</span>
         </button>
     </section>
 
     <!-- About Section -->
-    <section class="section" id="about">
+    <section class="section" id="about" >
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title" data-title-en="About Me" data-title-ar="معلومات عني">About Me</h2>
             <div class="about-content">
                 <div class="about-card">
-                    <h3><i class="fas fa-fire"></i> The Vibe</h3>
+                    <h3><i class="fas fa-fire"></i> <span data-title-en="The Vibe" data-title-ar="الأجواء">The Vibe</span></h3>
                     <p><strong>Ayman M. Khair</strong> • 16 • Jeddah 🇸🇦<br>
-                    Code • Fight • Pray • Repeat</p>
+                    <span data-description-en="Building cool stuff with code, throwing hands in the ring, staying grounded with faith." data-description-ar="بناء أشياء رائعة بالبرمجة، والقتال في الحلبة، والبقاء متجذرًا بالإيمان.">Building cool stuff with code, throwing hands in the ring, staying grounded with faith.</span></p>
                 </div>
                 <div class="about-card">
-                    <h3><i class="fas fa-rocket"></i> What I'm About</h3>
-                    <p>Building cool stuff with code, throwing hands in the ring, staying grounded with faith. Academic beast by day, anime connoisseur by night.</p>
+                    <h3><i class="fas fa-rocket"></i> <span data-title-en="What I'm About" data-title-ar="ما أفعله">What I'm About</span></h3>
+                    <p><span data-description-en="Building cool stuff with code, throwing hands in the ring, staying grounded with faith." data-description-ar="بناء أشياء رائعة بالبرمجة، والقتال في الحلبة، والبقاء متجذرًا بالإيمان.">Building cool stuff with code, throwing hands in the ring, staying grounded with faith.</span></p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="section" id="skills">
-                    <div class="container">
-            <h2 class="section-title">My Arsenal</h2>
+    <section class="section" id="skills" data-title-en="My Arsenal" data-title-ar="ترسانتي">
+        <div class="container">
+            <h2 class="section-title" data-title-en="My Arsenal" data-title-ar="ترسانتي">My Arsenal</h2>
             <div class="skills-grid">
                 <div class="skill-category">
                     <div class="skill-icon"><i class="fas fa-code"></i></div>
-                    <h3>Code Ninja 🥷</h3>
+                    <h3 data-title-en="Code Ninja 🥷" data-title-ar="نينجا البرمجة 🥷">Code Ninja 🥷</h3>
                     <ul class="skill-list">
-                        <li>HTML5 & CSS3</li>
-                        <li>JavaScript (ES6+)</li>
-                        <li>Tailwind CSS</li>
-                        <li>GitHub & Git</li>
-                        <li>Responsive Magic</li>
+                        <li data-skill-en="HTML5 & CSS3" data-skill-ar="HTML5 و CSS3">HTML5 & CSS3</li>
+                        <li data-skill-en="JavaScript (ES6+)" data-skill-ar="JavaScript (ES6+)">JavaScript (ES6+)</li>
+                        <li data-skill-en="Tailwind CSS" data-skill-ar="Tailwind CSS">Tailwind CSS</li>
+                        <li data-skill-en="GitHub & Git" data-skill-ar="GitHub و Git">GitHub & Git</li>
+                        <li data-skill-en="Responsive Magic" data-skill-ar="سحر الاستجابة">Responsive Magic</li>
                     </ul>
                 </div>
                 <div class="skill-category">
                     <div class="skill-icon"><i class="fas fa-brain"></i></div>
-                    <h3>Big Brain Energy 🧠</h3>
+                    <h3 data-title-en="Big Brain Energy 🧠" data-title-ar="قوة ذهنية 🧠">Big Brain Energy 🧠</h3>
                     <ul class="skill-list">
-                        <li>Academic Beast</li>
-                        <li>Quran Scholar</li>
-                        <li>Critical Thinker</li>
-                        <li>Research Wizard</li>
-                        <li>Problem Crusher</li>
+                        <li data-skill-en="Academic Beast" data-skill-ar="وحش أكاديمي">Academic Beast</li>
+                        <li data-skill-en="Quran Scholar" data-skill-ar="عالم قرآن">Quran Scholar</li>
+                        <li data-skill-en="Critical Thinker" data-skill-ar="مفكر نقدي">Critical Thinker</li>
+                        <li data-skill-en="Research Wizard" data-skill-ar="ساحر بحث">Research Wizard</li>
+                        <li data-skill-en="Problem Crusher" data-skill-ar="محطم المشاكل">Problem Crusher</li>
                     </ul>
                 </div>
                 <div class="skill-category">
                     <div class="skill-icon"><i class="fas fa-globe"></i></div>
-                    <h3>Multilingual Flex 🌍</h3>
+                    <h3 data-title-en="Multilingual Flex 🌍" data-title-ar="متعدد اللغات 🌍">Multilingual Flex 🌍</h3>
                     <ul class="skill-list">
-                        <li>English (Fluent AF)</li>
-                        <li>Arabic (Native Boss)</li>
-                        <li>German (Learning)</li>
-                        <li>Code (Obviously)</li>
-                        <li>Meme Language</li>
+                        <li data-skill-en="English (Fluent AF)" data-skill-ar="الإنجليزية (بطلاقة)">English (Fluent AF)</li>
+                        <li data-skill-en="Arabic (Native Boss)" data-skill-ar="العربية (الأصلية)">Arabic (Native Boss)</li>
+                        <li data-skill-en="German (Learning)" data-skill-ar="الألمانية (أتعلم)">German (Learning)</li>
+                        <li data-skill-en="Code (Obviously)" data-skill-ar="الكود (بالطبع)">Code (Obviously)</li>
+                        <li data-skill-en="Meme Language" data-skill-ar="لغة الميمات">Meme Language</li>
                     </ul>
                 </div>
                 <div class="skill-category">
                     <div class="skill-icon"><i class="fas fa-fire"></i></div>
-                    <h3>Life Interests 🔥</h3>
+                    <h3 data-title-en="Life Interests 🔥" data-title-ar="اهتمامات الحياة 🔥">Life Interests 🔥</h3>
                     <ul class="skill-list">
-                        <li>Kickboxing Beast</li>
-                        <li>Anime Connoisseur</li>
-                        <li>Debate Champion</li>
-                        <li>Gym Warrior</li>
-                        <li>Gaming Sessions</li>
+                        <li data-skill-en="Kickboxing Beast" data-skill-ar="وحش الكيك بوكسينغ">Kickboxing Beast</li>
+                        <li data-skill-en="Anime Connoisseur" data-skill-ar="خبير الأنمي">Anime Connoisseur</li>
+                        <li data-skill-en="Debate Champion" data-skill-ar="بطل المناظرات">Debate Champion</li>
+                        <li data-skill-en="Gym Warrior" data-skill-ar="محارب الصالة الرياضية">Gym Warrior</li>
+                        <li data-skill-en="Gaming Sessions" data-skill-ar="جلسات الألعاب">Gaming Sessions</li>
                     </ul>
                 </div>
             </div>
@@ -626,45 +688,57 @@
             <h2 class="section-title">Hit Me Up</h2>
             <div class="social-grid">
                 <a href="https://instagram.com/aayman_m_k" class="social-link" target="_blank">
-                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-instagram fa-3x"></i>
                     <div class="social-info">
                         <h4>Instagram</h4>
                         <p>@aayman_m_k</p>
+                        <p class="tagline">Where the moodboard lives.</p>
+                        <button class="copy-link-btn" onclick="copyToClipboard('https://instagram.com/aayman_m_k')">Copy Link</button>
                     </div>
                 </a>
                 <a href="https://tiktok.com/@aayman_m_k" class="social-link" target="_blank">
-                    <i class="fab fa-tiktok"></i>
+                    <i class="fab fa-tiktok fa-3x"></i>
                     <div class="social-info">
                         <h4>TikTok</h4>
                         <p>@aayman_m_k</p>
+                        <p class="tagline">For kicks & chaos.</p>
+                        <button class="copy-link-btn" onclick="copyToClipboard('https://tiktok.com/@aayman_m_k')">Copy Link</button>
                     </div>
                 </a>
                 <a href="https://facebook.com/100072208415955" class="social-link" target="_blank">
-                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-facebook fa-3x"></i>
                     <div class="social-info">
                         <h4>Facebook</h4>
                         <p>Profile</p>
+                        <p class="tagline">Connect with friends.</p>
+                        <button class="copy-link-btn" onclick="copyToClipboard('https://facebook.com/100072208415955')">Copy Link</button>
                     </div>
                 </a>
                 <a href="mailto:ayman.yaman77777@gmail.com" class="social-link">
-                    <i class="fas fa-envelope"></i>
+                    <i class="fas fa-envelope fa-3x"></i>
                     <div class="social-info">
                         <h4>Email</h4>
                         <p>ayman.yaman77777@gmail.com</p>
+                        <p class="tagline">Business mode: ON.</p>
+                        <button class="copy-link-btn" onclick="copyToClipboard('ayman.yaman77777@gmail.com')">Copy Link</button>
                     </div>
                 </a>
                 <a href="tel:+966502758880" class="social-link">
-                    <i class="fas fa-phone"></i>
+                    <i class="fas fa-phone fa-3x"></i>
                     <div class="social-info">
                         <h4>Phone</h4>
                         <p>+966 502758880</p>
+                        <p class="tagline">Reach out anytime.</p>
+                        <button class="copy-link-btn" onclick="copyToClipboard('+966502758880')">Copy Link</button>
                     </div>
                 </a>
                 <a href="https://github.com/ayman-121" class="social-link" target="_blank">
-                    <i class="fab fa-github"></i>
+                    <i class="fab fa-github fa-3x"></i>
                     <div class="social-info">
                         <h4>GitHub</h4>
                         <p>ayman-121</p>
+                        <p class="tagline">My code cave.</p>
+                        <button class="copy-link-btn" onclick="copyToClipboard('https://github.com/ayman-121')">Copy Link</button>
                     </div>
                 </a>
             </div>
@@ -674,9 +748,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Ayman's Digital Space</p>
-            <p>Main site: <a href="https://ayman-121.github.io/me-v3/">ayman-121.github.io/me-v3/</a></p>
-            <p>Thanks for scanning my shirt, you legend 😎</p>
+            <p data-footer-en="© 2025 Ayman's Digital Space" data-footer-ar="© 2025 مساحة أيمن الرقمية">© 2025 Ayman's Digital Space</p>
+            <p data-footer-en="Main site: " data-footer-ar="الموقع الرئيسي: ">Main site: </p>
+            <p><a href="https://ayman-121.github.io/me-v3/" data-footer-link-en="ayman-121.github.io/me-v3/" data-footer-link-ar="ayman-121.github.io/me-v3/">ayman-121.github.io/me-v3/</a></p>
+            <p data-footer-en="Thanks for scanning my shirt, you legend 😎" data-footer-ar="شكرًا لمسح قميصي، أنت أسطورة 😎">Thanks for scanning my shirt, you legend 😎</p>
         </div>
     </footer>
 
@@ -780,6 +855,54 @@ Type 'vibe()' to unlock something cool 😎
         sections.forEach(section => {
             observer.observe(section);
         });
+
+        // Language Switching Functionality
+        document.getElementById('en-btn').addEventListener('click', () => {
+            switchLanguage('en');
+        });
+
+        document.getElementById('ar-btn').addEventListener('click', () => {
+            switchLanguage('ar');
+        });
+
+        function switchLanguage(lang) {
+            // Change text content based on selected language
+            document.querySelectorAll('[data-title-en], [data-title-ar]').forEach(element => {
+                const titleText = element.querySelector('.title-text');
+                if (titleText) {
+                    titleText.textContent = element.getAttribute(`data-title-${lang}`);
+                }
+            });
+            document.querySelectorAll('[data-subtitle-en], [data-subtitle-ar]').forEach(element => {
+                element.textContent = element.getAttribute(`data-subtitle-${lang}`);
+            });
+            document.querySelectorAll('[data-description-en], [data-description-ar]').forEach(element => {
+                element.textContent = element.getAttribute(`data-description-${lang}`);
+            });
+            document.querySelectorAll('[data-skill-en], [data-skill-ar]').forEach(element => {
+                element.textContent = element.getAttribute(`data-skill-${lang}`);
+            });
+            document.querySelectorAll('[data-tagline-en], [data-tagline-ar]').forEach(element => {
+                element.textContent = element.getAttribute(`data-tagline-${lang}`);
+            });
+            document.querySelectorAll('[data-about-en], [data-about-ar]').forEach(element => {
+                element.textContent = element.getAttribute(`data-about-${lang}`);
+            });
+            // Change layout direction
+            if (lang === 'ar') {
+                document.body.setAttribute('dir', 'rtl');
+                document.body.setAttribute('lang', 'ar');
+            } else {
+                document.body.setAttribute('dir', 'ltr');
+                document.body.setAttribute('lang', 'en');
+            }
+            // Update specific content for Saudi/Jordanian accent
+            if (lang === 'ar') {
+                document.querySelectorAll('.about-card p').forEach(p => {
+                    p.innerHTML = p.innerHTML.replace(/بناء أشياء رائعة بالبرمجة، والقتال في الحلبة، والبقاء متجذرًا بالإيمان/, 'بنبني أشياء حلوة بالكود، وبنقاتل في الحلبة، وبنظل ثابتين على إيماننا.');
+                });
+            }
+        }
     </script>
 </body>
 </html>
